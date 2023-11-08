@@ -57,7 +57,7 @@ const deleteCar = (params) => {
 
 return (
     <>
-    <h1> issa Carlist bitch</h1>
+    <h1> issa Carlist</h1>
     <div className="ag-theme-material"
     style={{height: "700px", width: "95%", margin: "auto"}}>
         
