@@ -4,6 +4,7 @@ import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-material.css';
 import { Button } from "@mui/material";
 import { Snackbar, useStepContext } from "@mui/material"
+import AddCar from "./AddCar";
 export default function Carlist() {
 
     const [cars, setCars] = useState([]);
@@ -22,9 +23,17 @@ const columns = [
      <Button size="small" color="error" onClick ={ () => deleteCar(params)}>
         Delete
      </Button>,
+     width:120
 
 }
+// //{
+//     cellRenderer: params => <EditCar params={params} updateCar={updateCar}/>,
+// width:120
+//}
+
+
 ]
+
 
 useEffect(() => getCars(), [])
 
@@ -54,12 +63,31 @@ const deleteCar = (params) => {
     .catch(error => console.error(error));
 }
 
+const addCar = (car) => {
+//alert('lisään auton kohta rest-rajapinnalla juu');
+fetch(REST_URL, {
+method: 'POST',
+headers: {'Content-Type': 'application/json'},
+body: JSON.stringify(car)
+
+})
+.then(response => {
+if (response.ok) {
+getCars();
+} else {
+alert('something wong')
+}
+})
+
+.catch(err => console.error(err));
+}
+
 
 return (
     <>
-    <h1> issa Carlist</h1>
+    <AddCar addCar={addCar}/>
     <div className="ag-theme-material"
-    style={{height: "700px", width: "95%", margin: "auto"}}>
+    style={{height: "700px", width: "100%", margin: "auto"}}>
         
         
         <AgGridReact
